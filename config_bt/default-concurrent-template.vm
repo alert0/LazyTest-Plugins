@@ -1,0 +1,71 @@
+package $!{classInfo.genPackageName};
+
+import common.BaseTestCase;
+import common.BaseTestConfig;
+import common.BaseTestBefore;
+import common.BaseTestAfter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.*;
+
+import javax.annotation.Resource;
+
+import lazy.test.tools.util.asserts.Assert;
+
+#foreach($import in $!{classInfo.genImportList})
+import $import;
+#end
+
+## TEST CONFIGURE
+## author[String]: 创建者
+## time[String]: 创建时间
+## classInfo[AGTTestClassInfoVO]: 创建测试类信息
+## testCode[String]: 测试编号
+## testNumList[List<Integer>]: 数据驱动用例数量
+## threadPoolSize[String]: 并发测试线程数
+## invocationCount[String]: 并发测试总运行次数
+
+/**
+* Created by $!{author} on $!{time}.
+*/
+public class $!{classInfo.genClassName} extends BaseTestCase {
+
+    private static final Logger logger = LoggerFactory.getLogger($!{classInfo.genClassName}.class);
+	
+	private $!{classInfo.testClassName} $!{classInfo.testClassVar} = new $!{classInfo.testClassName}();
+    #foreach($tempNum in $!{testNumList})
+
+    @BaseTestBefore(testCode = "$!{testCode}_$tempNum")
+    public void preMethod_$!{testCode}_$tempNum($!{classInfo.testMethodParam}) throws Exception {
+        //TODO prepare data and input param
+    }
+
+    @BaseTestAfter(testCode = "$!{testCode}_$tempNum")
+    public void postMethod_$!{testCode}_$tempNum(#if($!{classInfo.testMethodParam})$!{classInfo.testMethodParam}#end#if($!{classInfo.testReturnObject})#if($!{classInfo.testMethodParam}), #end$!{classInfo.testReturnObject} testResult#end) throws Exception {
+        //TODO assert result and clean data
+    }
+    #end
+
+    /**
+    * Interface Method Invoke
+    */
+    @Test(dataProvider="csvDataProvider", threadPoolSize=$!{threadPoolSize}, invocationCount=$!{invocationCount})
+    @BaseTestConfig(testPath = "$!{classInfo.genConfigPath}")
+    public void $!{classInfo.genMethodName}($!{classInfo.genMethodParam}) throws Exception {
+
+        logger.info("Test Case: {}.{} start", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}");
+
+        try {
+            #if($!{classInfo.testReturnObject})$!{classInfo.testReturnObject} testResult = #end$!{classInfo.testClassVar}.$!{classInfo.testMethodName}($!{classInfo.testInvokeParam});
+            #if($!{classInfo.testReturnObject})this.setTestResult(testResult);#end
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Test Case: {}.{} failed", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}");
+            throw e;
+        }
+
+        logger.info("Test Case: {}.{} end", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}");
+    }
+
+}

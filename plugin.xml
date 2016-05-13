@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.method.default"
+                adaptable="true"
+                objectClass="org.eclipse.jdt.core.IMethod">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.method.default"
+                    label="配置通用测试用例"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.method.default"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenDefaultTestAction">
+            </action>
+        </objectContribution>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.method.thread"
+                adaptable="true"
+                objectClass="org.eclipse.jdt.core.IMethod">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.method.thread"
+                    label="配置并发测试用例"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.method.thread"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenThreadTestAction">
+            </action>
+        </objectContribution>
+    </extension>
+
+    <!--extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.method.performance"
+                adaptable="true"
+                objectClass="org.eclipse.jdt.core.IMethod">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.method.performance"
+                    label="配置性能测试用例"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.method.performance"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenPerformanceTestAction">
+            </action>
+        </objectContribution>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.package.performance"
+                adaptable="true"
+                objectClass="org.eclipse.jdt.core.IPackageFragment">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.package.performance"
+                    label="配置Http性能测试用例"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.package.performance"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenHttpPerformanceTestAction">
+            </action>
+        </objectContribution>
+    </extension-->
+
+    <extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.project.base"
+                adaptable="true"
+                objectClass="org.eclipse.core.resources.IProject">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.project.base"
+                    label="创建通用测试基础"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.project.base"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenProjectBaseAction">
+            </action>
+        </objectContribution>
+    </extension>
+
+    <!--extension
+            point="org.eclipse.ui.popupMenus">
+        <objectContribution
+                id="lazy.test.plugin.popmenu.extend.contribution.project.performance"
+                adaptable="true"
+                objectClass="org.eclipse.core.resources.IProject">
+            <action
+                    id="lazy.test.plugin.popmenu.extend.action.project.performance"
+                    label="创建性能测试基础"
+                    menubarPath="lazy.test.plugin.popmenu.extend.contribution.project.performance"
+                    enablesFor="1"
+                    icon="icons/sample.gif"
+                    class="lazy.test.plugin.front.action.AGTGenPerformanceBaseAction">
+            </action>
+        </objectContribution>
+    </extension-->
+
+</plugin>

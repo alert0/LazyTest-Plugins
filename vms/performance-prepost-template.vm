@@ -1,0 +1,29 @@
+package $!{classInfo.genPackageName};
+
+import common.BasePerformanceCase;
+import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
+import org.apache.jmeter.samplers.SampleResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+## TEST CONFIGURE
+## author[String]: 创建者
+## time[String]: 创建时间
+## classInfo[AGTTestClassInfoVO]: 创建测试类信息
+
+/**
+* Created by $!{author} on $!{time}.
+*/
+public class $!{classInfo.genClassName} extends BasePerformanceCase {
+
+    private static final Logger logger = LoggerFactory.getLogger($!{classInfo.genClassName}.class);
+
+    /**
+    * Prepare Data and Initial
+    */
+    public SampleResult run(JavaSamplerContext ctx) throws Exception {
+
+        return null;
+    }
+
+}

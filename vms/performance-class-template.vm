@@ -1,0 +1,62 @@
+package $!{classInfo.genPackageName};
+
+import common.BasePerformanceCase;
+import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
+import org.apache.jmeter.samplers.SampleResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Resource;
+
+#foreach($import in $!{classInfo.genImportList})
+import $import;
+#end
+
+## TEST CONFIGURE
+## author[String]: 创建者
+## time[String]: 创建时间
+## classInfo[AGTTestClassInfoVO]: 创建测试类信息
+
+/**
+* Created by $!{author} on $!{time}.
+*/
+public class $!{classInfo.genClassName} extends BasePerformanceCase {
+
+    private static final Logger logger = LoggerFactory.getLogger($!{classInfo.genClassName}.class);
+	
+	@Resource
+	private $!{classInfo.testClassName} $!{classInfo.testClassVar};
+
+#foreach($tempParam in $!{classInfo.testParamList})
+    private $tempParam;
+
+#end
+
+    /**
+    * Interface Method Invoke
+    */
+    public SampleResult run(JavaSamplerContext ctx) throws Exception {
+
+        initTestParam();
+
+        SampleResult sample = new SampleResult();
+        try {
+            sample.sampleStart();
+            #if($!{classInfo.testReturnObject})$!{classInfo.testReturnObject} testResult = #end$!{classInfo.testClassVar}.$!{classInfo.testMethodName}($!{classInfo.testInvokeParam});
+            sample.sampleEnd();
+
+            sample.setSuccessful(true);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Test Case: {} failed", "$!{classInfo.genClassName}");
+            throw e;
+        }
+        return sample;
+    }
+
+    private void initTestParam() {
+        throw new RuntimeException("init param required");
+    }
+
+}

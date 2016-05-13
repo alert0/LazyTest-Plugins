@@ -1,0 +1,60 @@
+package $!{classInfo.genPackageName};
+
+import common.BaseTestCase;
+
+import java.io.File;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.*;
+
+import lazy.test.tools.util.ParamAutoAssertUtil;
+
+import lazy.test.tools.util.asserts.Assert;
+
+## TEST CONFIGURE
+## author[String]: 创建者
+## time[String]: 创建时间
+## classInfo[AGTTestClassInfoVO]: 创建测试类信息
+
+/**
+* Created by $!{author} on $!{time}.
+*/
+public class $!{classInfo.genClassName} extends BaseTestCase {
+
+    private static final Logger logger = LoggerFactory.getLogger($!{classInfo.genClassName}.class);
+
+    /**
+    * Interface Method Invoke
+    */
+    @Test
+    public void $!{classInfo.genMethodName}() throws Exception {
+
+        String startTime = getTimeSnapshot();
+        logger.info("Test Case: {}.{} start at: {}", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}", startTime);
+
+        try {
+            File file = findFileConfig("$!{classInfo.genConfigPath}");
+            List<String> resultList = ParamAutoAssertUtil.paramSingleAssert(file, applicationContext);
+            if (resultList != null && !resultList.isEmpty()) {
+                logger.error("=============[ASSERT INFO]=============");
+                StringBuilder builder = new StringBuilder();
+                for (String errMsg : resultList) {
+                    builder.append(errMsg).append("\r\n");
+                    logger.error(errMsg);
+                }
+                logger.error("=============[ASSERT INFO]=============");
+                Assert.fail(builder.toString());
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Test Case: {}.{} failed", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}");
+            throw e;
+        } finally {
+            String endTime = getTimeSnapshot();
+            logger.info("Test Case: {}.{} end at: {}", "$!{classInfo.genClassName}", "$!{classInfo.genMethodName}", endTime);
+        }
+    }
+
+}

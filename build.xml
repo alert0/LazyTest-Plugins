@@ -105,11 +105,6 @@
 	<target name="build.update.perf.jar" depends="init" description="Build the plug-in: lazy_test_perf_plugin for an update site.">
 		<copy todir="${basedir}/" file="${basedir}/config_perf/plugin.xml" overwrite="true" />
 		<copy todir="${basedir}/META-INF" file="${basedir}/config_perf/MANIFEST.MF" overwrite="true" />
-		<copy todir="${basedir}/vms" overwrite="true">
-			<fileset dir="${basedir}/config_bt">
-				<include name="*.vm"/>
-			</fileset>
-		</copy>
 		<delete dir="${temp.folder}"/>
 		<mkdir dir="${temp.folder}"/>
 		<antcall target="build.jars"/>

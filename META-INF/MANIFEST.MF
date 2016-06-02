@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lazy Test
 Bundle-SymbolicName: lazy_test_plugin;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Activator: lazy.test.plugin.front.Activator
 Bundle-Vendor: LazyTest
 Require-Bundle: org.eclipse.ui,
